@@ -1,0 +1,21 @@
+speedy
+base
+tanky
+Maclasse1
+MaClasse2
+
+---------------------
+Créer classe:
+
+speedy | Base | Tanky
+
+vit -------------------    |
+pui -----                  |
+cad -----------            |
+
+		     Valide
+
+Personnage speedy = new PErsonnage(vit,pui,cad)
+
+Coup special en fonction de la puissance
+	3 coups diff

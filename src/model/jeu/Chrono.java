@@ -7,30 +7,32 @@ public class Chrono implements Runnable{
 
     @Override
     public void run() {
-        while(true){
+        while(Main.scene.jeuEnCours == true){
             //Actualise les images a l'ecran
-            for(int i=Main.scene.joueur1.getTourTir(); i<5; i++) {
-                if (Main.scene.joueur1.getDirTir() <= 2 && Main.scene.joueur1.getLaser(i).isVaisseauTir() == false){
-                    Main.scene.joueur1.getLaser(i).setImage("/img/laser.png");
-                    if(Main.scene.joueur1.getDirTir() == 1){
-                        Main.scene.joueur1.getLaser(i).setDx(2);
-                        Main.scene.joueur1.getLaser(i).setDy(0);
-                    } else {
-                        Main.scene.joueur1.getLaser(i).setDx(-2);
-                        Main.scene.joueur1.getLaser(i).setDy(0);
+            for(int j=0; j < Main.scene.joueurs.size(); j++) {
+                for (int i = 0; i < Main.scene.joueurs.get(j).getTir().size(); i++) {
+                    if (Main.scene.joueurs.get(j).getDirTir() <= 2 && Main.scene.joueurs.get(j).getLaser(i).isVaisseauTir() == false) {
+                        Main.scene.joueurs.get(j).getLaser(i).setImage("/img/laser.png");
+                        if (Main.scene.joueurs.get(j).getDirTir() == 1) {
+                            Main.scene.joueurs.get(j).getLaser(i).setDx(2);
+                            Main.scene.joueurs.get(j).getLaser(i).setDy(0);
+                        } else {
+                            Main.scene.joueurs.get(j).getLaser(i).setDx(-2);
+                            Main.scene.joueurs.get(j).getLaser(i).setDy(0);
+                        }
                     }
-                }
-                if (Main.scene.joueur1.getDirTir() >= 3 && Main.scene.joueur1.getLaser(i).isVaisseauTir() == false){
-                    Main.scene.joueur1.getLaser(i).setImage("/img/laserB.png");
-                    if(Main.scene.joueur1.getDirTir() == 3){
-                        Main.scene.joueur1.getLaser(i).setDx(0);
-                        Main.scene.joueur1.getLaser(i).setDy(2);
-                    } else {
-                        Main.scene.joueur1.getLaser(i).setDx(0);
-                        Main.scene.joueur1.getLaser(i).setDy(-2);
+                    if (Main.scene.joueurs.get(j).getDirTir() >= 3 && Main.scene.joueurs.get(j).getLaser(i).isVaisseauTir() == false) {
+                        Main.scene.joueurs.get(j).getLaser(i).setImage("/img/laserB.png");
+                        if (Main.scene.joueurs.get(j).getDirTir() == 3) {
+                            Main.scene.joueurs.get(j).getLaser(i).setDx(0);
+                            Main.scene.joueurs.get(j).getLaser(i).setDy(2);
+                        } else {
+                            Main.scene.joueurs.get(j).getLaser(i).setDx(0);
+                            Main.scene.joueurs.get(j).getLaser(i).setDy(-2);
+                        }
                     }
-                }
 
+                }
             }
 
             Main.scene.repaint();

@@ -22,9 +22,11 @@ public class Joueur{
     private Image imgJoueur;
     private ArrayList<Laser> tir = new ArrayList<Laser>();
 
+    private int vie;
+
     //CONSTRUCTEUR
 
-    public Joueur(int x, int y, String strImage){
+    public Joueur(int x, int y, String strImage, int dirTir, int vie){
         this.largeur = 40;
         this.hauteur = 40;
         this.x = x;
@@ -32,10 +34,12 @@ public class Joueur{
         this.dx = 0;
         this.dy = 0;
         this.tourTir = 0;
-        this.dirTir = 1;
+        this.dirTir = dirTir;
         this.strImage = strImage;
         this.icoJoueur = new ImageIcon(getClass().getResource(this.strImage));
         this.imgJoueur = this.icoJoueur.getImage();
+
+        this.vie = vie;
     }
 
     //GETTER
@@ -61,6 +65,8 @@ public class Joueur{
     public int getDirTir() {return dirTir;}
 
     public ArrayList<Laser> getTir() {return tir;}
+
+    public int getVie() {return vie;}
 
     //SETTER
 
@@ -92,5 +98,11 @@ public class Joueur{
         if(this.dy < 0){if(this.y > 0){this.y = this.y + this.dy;}
         }else if(dy > 0){if(this.y + this.dy < 645){this.y = this.y + this.dy;}}
         return this.y;
+    }
+
+    public void degat(){
+        this.vie = this.vie - 10;
+        if(this.vie < 0){this.vie = 0;}
+        System.out.println(this.vie);
     }
 }

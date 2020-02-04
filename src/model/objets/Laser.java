@@ -1,5 +1,8 @@
 package model.objets;
 
+import controler.Main;
+import model.personnage.Joueur;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -37,6 +40,9 @@ public class Laser {
     }
 
     //GETTER
+    public int getLargeur() {return largeur;}
+
+    public int getHauteur() {return hauteur;}
 
     public int getX(){return this.x;}
 
@@ -113,6 +119,18 @@ public class Laser {
     public void dessinTirVaisseau(Graphics g){
         if(this.vaisseauTir == true){
             g.drawImage(this.imgLaser, this.deplacementTirVaisseauX(), deplacementTirVaisseauY(), null);
+        }
+    }
+
+    public void collision(Joueur j, int a){
+        if(this.x + this.largeur > j.getX() && this.x < j.getX() + j.getLargeur()
+                && this.y + this.hauteur > j.getY() && this.y < j.getY() + j.getHauteur()
+        ){
+            this.vaisseauTir = false;
+            this.x = -100;
+            this.y = -100;
+            System.out.println("Collision !!!");
+            Main.scene.joueurs.get(a).degat();
         }
     }
 }

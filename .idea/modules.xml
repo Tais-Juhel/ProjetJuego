@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/peojet_devlog.iml" filepath="$PROJECT_DIR$/peojet_devlog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/essaiJuego.iml" filepath="$PROJECT_DIR$/essaiJuego.iml" />
     </modules>
   </component>
 </project>

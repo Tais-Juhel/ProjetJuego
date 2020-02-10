@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Scene extends JPanel {
     //VARIABLES
+    private Accueil accueil = new Accueil();
+
     private ImageIcon icoBackG;
     private Image imgBackG;
 
@@ -17,7 +19,7 @@ public class Scene extends JPanel {
 
     public ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 
-    public boolean jeuEnCours = true;
+    public boolean jeuEnCours = false;
 
     //CONSTRUCTEUR
     public Scene(){
@@ -45,26 +47,27 @@ public class Scene extends JPanel {
 
     //METHODES
     public void paintComponent(Graphics g){
-        //Test collision Lasers J1
-        for(int l=0; l<this.joueurs.get(0).getTir().size(); l++){
-            this.joueurs.get(0).getTir().get(l).collision(this.joueurs.get(1), 0);
-        }
-        //Test collision Lasers J2
-        for(int l=0; l<this.joueurs.get(1).getTir().size(); l++){
-            this.joueurs.get(1).getTir().get(l).collision(this.joueurs.get(0), 1);
+        if(jeuEnCours == false) {
+            g.drawImage(this.accueil.getImgSelect(), 100, 100, null);
+            g.drawImage(this.accueil.getImgClasse(), 100, 200, null);
+            g.drawImage(this.accueil.getImgInstru(), 100, 300, null);
+            g.drawImage(this.accueil.getImgJouer(), 100, 400, null);
+            g.drawImage(this.accueil.getImgOptions(), 100, 500, null);
         }
 
-        g.drawImage(this.imgBackG, 0, 0, null);
-        for(int j=0; j < joueurs.size(); j++) {
-            g.drawImage(this.joueurs.get(j).getImgJoueur(), this.joueurs.get(j).deplacementJoueurX(), this.joueurs.get(j).deplacementJoueurY(), null);
-            for (int i = 0; i < Main.scene.joueurs.get(j).getTir().size(); i++) {
-                this.joueurs.get(j).getLaser(i).dessinTirVaisseau(g);
-            }
+        if(jeuEnCours == true) {
+            g.drawImage(this.imgBackG, 0, 0, null);
+            for (int j = 0; j < joueurs.size(); j++) {
+                g.drawImage(this.joueurs.get(j).getImgJoueur(), this.joueurs.get(j).deplacementJoueurX(), this.joueurs.get(j).deplacementJoueurY(), null);
+                for (int i = 0; i < Main.scene.joueurs.get(j).getTir().size(); i++) {
+                    this.joueurs.get(j).getLaser(i).dessinTirVaisseau(g);
+                }
 
-            //Test si un joueur n'as plus de vie
-            if(Main.scene.joueurs.get(j).getVie() == 0){
-                this.jeuEnCours = false;
-                System.out.println("Fin du jeu !!!");
+                //Test si un joueur n'as plus de vie
+                if (Main.scene.joueurs.get(j).getVie() == 0) {
+                    this.jeuEnCours = false;
+                    System.out.println("Fin du jeu !!!");
+                }
             }
         }
     }

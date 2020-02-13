@@ -96,7 +96,7 @@ public class Laser {
 
     public int deplacementTirVaisseauY(){
         if(this.vaisseauTir == true) {
-            if (this.y > 0 && this.y < 680) {
+            if (this.y > 20 && this.y < 680) {
                 this.y = this.y - this.dy;
             } else {
                 this.vaisseauTir = false;
@@ -107,7 +107,7 @@ public class Laser {
 
     public int deplacementTirVaisseauX(){
         if(this.vaisseauTir == true) {
-            if (this.x < 1080 && this.x > 0) {
+            if (this.x < 1000 && this.x > 50) {
                 this.x = this.x + this.dx;
             } else {
                 this.vaisseauTir = false;
@@ -122,7 +122,7 @@ public class Laser {
         }
     }
 
-    public void collision(Joueur j, int a){
+    public void collision(Joueur j){
         if(this.x + this.largeur > j.getX() && this.x < j.getX() + j.getLargeur()
                 && this.y + this.hauteur > j.getY() && this.y < j.getY() + j.getHauteur()
         ){
@@ -130,7 +130,11 @@ public class Laser {
             this.x = -100;
             this.y = -100;
             System.out.println("Collision !!!");
-            Main.scene.joueurs.get(a).degat();
+            j.degat();
+        }
+        if(this.x + this.largeur > 521 && this.x < 588
+                && this.y + this.hauteur > 160 && this.y < 490){
+            this.vaisseauTir = false;
         }
     }
 }

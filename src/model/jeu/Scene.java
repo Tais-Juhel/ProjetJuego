@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class Scene extends JPanel {
     //VARIABLES
-    private Accueil accueil = new Accueil();
-    private Combat combat = new Combat();
+    public Accueil accueil = new Accueil();
+    public Combat combat = new Combat();
 
     private ImageIcon icoBackG;
     private Image imgBackG;
@@ -32,9 +32,9 @@ public class Scene extends JPanel {
         this.icoBackG = new ImageIcon(getClass().getResource("/img/background.png"));
         this.imgBackG = icoBackG.getImage();
 
-        this.joueur1 = new Joueur(0, 330, "/img/joueur.png", 1, 100);
+        this.joueur1 = new Joueur(50, 330, "/img/joueur.png", 1, 100);
         this.joueur1.ajouterLaser(6);
-        this.joueur2 = new Joueur(1027, 330, "/img/joueur.png", 2, 100);
+        this.joueur2 = new Joueur(988, 330, "/img/joueur.png", 2, 100);
         this.joueur2.ajouterLaser(2);
 
         this.joueurs.add(this.joueur1);
@@ -64,24 +64,73 @@ public class Scene extends JPanel {
         }
 
         else if(screen == 1){
-            g.drawImage(this.combat.getImg3(), 500, 300, null);
-            g.drawImage(this.combat.getImg2(), 500, 300, null);
-            g.drawImage(this.combat.getImg1(), 500, 300, null);
-            g.drawImage(this.combat.getImgGo(), 500, 300, null);
+            //Decompte avant partie
+            if(this.combat.getTime() != 150){
+                this.combat.setTime(Main.scene.combat.getTime()+1);
+                System.out.println("Yo");
+            }
+            else if(this.combat.getTime() == 150){
+                this.combat.setTime(0);
+                this.combat.setDecompte(this.combat.getDecompte()-1);
+                System.out.println("Yo");
+            }
+
+
+            switch(this.combat.getDecompte()) {
+                case 3:
+                    g.drawImage(this.combat.getImg3(), 500, 300, null);
+                    break;
+                case 2:
+                    g.drawImage(this.combat.getImg2(), 500, 300, null);
+                    break;
+                case 1:
+                    g.drawImage(this.combat.getImg1(), 500, 300, null);
+                    break;
+                case 0:
+                    g.drawImage(this.combat.getImgGo(), 450, 300, null);
+                    break;
+                default:
+                    this.screen = 2;
+                    this.combat.setDecompte(3);
+                    break;
+            }
         }
 
         else if(screen == 2) {
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+            g.drawString("PV J1 :", 65, 35);
+            g.drawString(Main.scene.joueur1.getVie()+"", 170, 35);
+            g.drawString(": PV J2", 920, 35);
+            g.drawString(Main.scene.joueur2.getVie()+"", 860, 35);
+
             for (int j = 0; j < joueurs.size(); j++) {
                 g.drawImage(this.joueurs.get(j).getImgJoueur(), this.joueurs.get(j).deplacementJoueurX(), this.joueurs.get(j).deplacementJoueurY(), null);
                 for (int i = 0; i < Main.scene.joueurs.get(j).getTir().size(); i++) {
                     this.joueurs.get(j).getLaser(i).dessinTirVaisseau(g);
                 }
+                System.out.println(Main.scene.joueur1.getX());
+                System.out.println(Main.scene.joueur1.getY());
 
                 //Test si un joueur n'as plus de vie
                 if (Main.scene.joueurs.get(j).getVie() == 0) {
-                    this.screen = 6;
+                    this.screen = 3;
+                    Main.scene.joueurs.get(1).setVie(100);
+                    Main.scene.joueurs.get(0).setVie(100);
                     System.out.println("Fin du jeu !!!");
                 }
+            }
+        }
+
+        else if(screen == 3){
+            g.drawImage(this.combat.getImgFinDePartie(), 260, 300, null);
+            g.drawImage(this.combat.getImgContinuer(), 260, 350, null);
+            if(this.combat.getTime() == 300){
+                this.combat.setTime(0);
+            }else if (this.combat.getTime() >= 150){
+                this.combat.setTime(this.combat.getTime()+1);
+            }else if(this.combat.getTime() < 150) {
+                g.drawImage(this.select.getImgSelect(), 330, 385, null);
+                this.combat.setTime(this.combat.getTime()+1);
             }
         }
     }

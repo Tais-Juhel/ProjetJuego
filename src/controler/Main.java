@@ -15,7 +15,7 @@ public class Main {
 
         //Arrête le programme au clic sur la croix rouge
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(1080,720);
+        fenetre.setSize(1080,750);
         //Place la fenetre au milieu de l'écran
         fenetre.setLocationRelativeTo(null);
         //Empeche le redimensionnement de la fenetre

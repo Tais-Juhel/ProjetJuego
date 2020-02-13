@@ -34,7 +34,7 @@ public class Clavier implements KeyListener{
                 Main.scene.screen = Main.scene.select.getNumPos();
             }
         }
-        else if(Main.scene.screen == 1) {
+        else if(Main.scene.screen == 2) {
             //Joueur1
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 Main.scene.joueurs.get(0).setDx(1);
@@ -92,6 +92,12 @@ public class Clavier implements KeyListener{
                         Main.scene.joueurs.get(1).setTourTir(0);
                     }
                 }
+            }
+        }
+
+        else if(Main.scene.screen == 3) {
+            if(e.getKeyCode() == KeyEvent.VK_SPACE){
+                Main.scene.screen = 0;
             }
         }
     }

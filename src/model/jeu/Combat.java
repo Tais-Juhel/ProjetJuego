@@ -19,6 +19,12 @@ public class Combat {
     private ImageIcon icoFinDePartie;
     private Image imgFinDePartie;
 
+    private ImageIcon icoContinuer;
+    private Image imgContinuer;
+
+    private int decompte;
+    private int time;
+
     //CONSTRUCTEUR
     public Combat() {
         this.ico1 = new ImageIcon(getClass().getResource("/img/1.png"));
@@ -33,9 +39,14 @@ public class Combat {
         this.ico3 = new ImageIcon(getClass().getResource("/img/3.png"));
         this.img3 = ico3.getImage();
 
-        this.icoGo = new ImageIcon(getClass().getResource("/img/3.png"));
+        this.icoGo = new ImageIcon(getClass().getResource("/img/go.png"));
         this.imgGo = icoGo.getImage();
 
+        this.icoContinuer = new ImageIcon(getClass().getResource("/img/continuer.png"));
+        this.imgContinuer = icoContinuer.getImage();
+
+        this.decompte = 3;
+        this.time = 0;
     }
 
     //GETTER
@@ -57,5 +68,26 @@ public class Combat {
 
     public Image getImgFinDePartie() {return imgFinDePartie;}
 
+    public Image getImgContinuer() {
+        return imgContinuer;
+    }
+
+    public int getDecompte() {
+        return decompte;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    //SETTER
+
+    public void setDecompte(int decompte) {
+        this.decompte = decompte;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 }
 

@@ -80,6 +80,10 @@ public class Joueur{
 
     public void setDirTir(int dirTir) {this.dirTir = dirTir; }
 
+    public void setVie(int vie) {
+        this.vie = vie;
+    }
+
     //METHODES
     public void ajouterLaser(int nbr){
         for(int i=0; i<nbr; i++){
@@ -89,14 +93,22 @@ public class Joueur{
     }
 
     public int deplacementJoueurX(){
-        if(this.dx < 0){if(this.x > 0){this.x = this.x + this.dx;}
-        }else if(dx > 0){if(this.x + this.dx < 1027){this.x = this.x + this.dx;}}
+        if(this.dx < 0){if(this.x > 50){this.x = this.x + this.dx;}
+        }else if(dx > 0){if(this.x + this.dx < 986){this.x = this.x + this.dx;}}
+        if(this.x + this.largeur > 521 && this.x < 588
+                && this.y + this.hauteur > 168 && this.y < 490){
+            this.x -= this.dx;
+        }
         return this.x;
     }
 
     public int deplacementJoueurY(){
-        if(this.dy < 0){if(this.y > 0){this.y = this.y + this.dy;}
-        }else if(dy > 0){if(this.y + this.dy < 645){this.y = this.y + this.dy;}}
+        if(this.dy < 0){if(this.y > 20){this.y = this.y + this.dy;}
+        }else if(dy > 0){if(this.y + this.dy < 662){this.y = this.y + this.dy;}}
+        if(this.x + this.largeur > 521 && this.x < 588
+                && this.y + this.hauteur > 168 && this.y < 490){
+            this.y -= this.dy;
+        }
         return this.y;
     }
 

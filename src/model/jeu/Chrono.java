@@ -7,7 +7,7 @@ public class Chrono implements Runnable{
 
     @Override
     public void run() {
-        while(Main.scene.jeuEnCours == true){
+        while(Main.scene.screen != 6){
             //Test collision Lasers J1
             for(int l=0; l<Main.scene.joueurs.get(0).getTir().size(); l++){
                 Main.scene.joueurs.get(0).getLaser(l).collision(Main.scene.joueurs.get(1), 0);

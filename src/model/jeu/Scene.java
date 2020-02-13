@@ -1,6 +1,7 @@
 package model.jeu;
 
 import controler.Main;
+import model.objets.Select;
 import model.personnage.Joueur;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class Scene extends JPanel {
     //VARIABLES
     private Accueil accueil = new Accueil();
+    private Combat combat = new Combat();
 
     private ImageIcon icoBackG;
     private Image imgBackG;
@@ -19,7 +21,9 @@ public class Scene extends JPanel {
 
     public ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 
-    public boolean jeuEnCours = false;
+    public int screen;
+
+    public Select select = new Select();
 
     //CONSTRUCTEUR
     public Scene(){
@@ -43,20 +47,30 @@ public class Scene extends JPanel {
 
         Thread chronoEcran = new Thread(new Chrono());
         chronoEcran.start();
+
+
+        this.screen = 0;
     }
 
     //METHODES
     public void paintComponent(Graphics g){
-        if(jeuEnCours == false) {
-            g.drawImage(this.accueil.getImgSelect(), 100, 100, null);
-            g.drawImage(this.accueil.getImgClasse(), 100, 200, null);
-            g.drawImage(this.accueil.getImgInstru(), 100, 300, null);
-            g.drawImage(this.accueil.getImgJouer(), 100, 400, null);
-            g.drawImage(this.accueil.getImgOptions(), 100, 500, null);
+        g.drawImage(this.imgBackG, 0, 0, null);
+        if(screen == 0) {
+            g.drawImage(this.select.getImgSelect(), this.select.getxPos(), this.select.getyPos(), null);
+            g.drawImage(this.accueil.getImgJouer(), 150, 200, null);
+            g.drawImage(this.accueil.getImgClasse(), 150, 300, null);
+            g.drawImage(this.accueil.getImgInstru(), 150, 400, null);
+            g.drawImage(this.accueil.getImgOptions(), 150, 500, null);
         }
 
-        if(jeuEnCours == true) {
-            g.drawImage(this.imgBackG, 0, 0, null);
+        else if(screen == 1){
+            g.drawImage(this.combat.getImg3(), 500, 300, null);
+            g.drawImage(this.combat.getImg2(), 500, 300, null);
+            g.drawImage(this.combat.getImg1(), 500, 300, null);
+            g.drawImage(this.combat.getImgGo(), 500, 300, null);
+        }
+
+        else if(screen == 2) {
             for (int j = 0; j < joueurs.size(); j++) {
                 g.drawImage(this.joueurs.get(j).getImgJoueur(), this.joueurs.get(j).deplacementJoueurX(), this.joueurs.get(j).deplacementJoueurY(), null);
                 for (int i = 0; i < Main.scene.joueurs.get(j).getTir().size(); i++) {
@@ -65,7 +79,7 @@ public class Scene extends JPanel {
 
                 //Test si un joueur n'as plus de vie
                 if (Main.scene.joueurs.get(j).getVie() == 0) {
-                    this.jeuEnCours = false;
+                    this.screen = 6;
                     System.out.println("Fin du jeu !!!");
                 }
             }

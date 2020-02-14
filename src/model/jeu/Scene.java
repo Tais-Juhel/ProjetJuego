@@ -19,6 +19,9 @@ public class Scene extends JPanel {
     private ImageIcon icoBackGInst;
     private Image imgBackGInst;
 
+    private ImageIcon icoTitle;
+    private Image imgTitle;
+
     public Joueur joueur1;
     public Joueur joueur2;
 
@@ -38,6 +41,9 @@ public class Scene extends JPanel {
 
         this.icoBackGInst = new ImageIcon(getClass().getResource("/img/BGInst.png"));
         this.imgBackGInst = icoBackGInst.getImage();
+
+        this.icoTitle = new ImageIcon(getClass().getResource("/img/title.png"));
+        this.imgTitle = icoTitle.getImage();
 
         this.joueur1 = new Joueur(50, 330, "/img/joueur1.png", 1, 100);
         this.joueur1.ajouterLaser(6);
@@ -63,6 +69,7 @@ public class Scene extends JPanel {
     public void paintComponent(Graphics g){
         g.drawImage(this.imgBackG, 0, 0, null);
         if(screen == 0) {
+            g.drawImage(this.imgTitle, 300, 100, null);
             g.drawImage(this.select.getImgSelect(), this.select.getxPos(), this.select.getyPos(), null);
             g.drawImage(this.accueil.getImgJouer(), 150, 300, null);
             g.drawImage(this.accueil.getImgInstru(), 150, 400, null);

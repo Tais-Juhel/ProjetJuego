@@ -11,7 +11,7 @@ public class Select {
     private Image imgSelect;
 
     public Select() {
-        this.yPos = 200;
+        this.yPos = 300;
         this.xPos = 50;
         this.numPos = 1;
         this.icoSelect = new ImageIcon(getClass().getResource("/img/arrow2_e.png"));

@@ -11,30 +11,45 @@ public class Clavier implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //Accueil
         if(Main.scene.screen == 0){
             System.out.println("Scene : 0 !!!");
             //Bouton pour Accueil
             if (e.getKeyCode() == KeyEvent.VK_UP) {
-                Main.scene.select.setNumPos(Main.scene.select.getNumPos()-1);
-                Main.scene.select.setyPos(Main.scene.select.getyPos()-100);
-                if(Main.scene.select.getNumPos() < 1){
-                    Main.scene.select.setNumPos(1);
-                    Main.scene.select.setyPos(200);
+                if(Main.scene.select.getNumPos() > 1){
+                    Main.scene.select.setNumPos(Main.scene.select.getNumPos()-1);
+                    Main.scene.select.setyPos(Main.scene.select.getyPos()-100);
                 }
             }
             else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                Main.scene.select.setNumPos(Main.scene.select.getNumPos()+1);
-                Main.scene.select.setyPos(Main.scene.select.getyPos()+100);
-                if(Main.scene.select.getNumPos() > 4){
-                    Main.scene.select.setNumPos(4);
-                    Main.scene.select.setyPos(500);
+                if(Main.scene.select.getNumPos() < 3){
+                    Main.scene.select.setNumPos(Main.scene.select.getNumPos()+1);
+                    Main.scene.select.setyPos(Main.scene.select.getyPos()+100);
                 }
             }
             else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 Main.scene.screen = Main.scene.select.getNumPos();
             }
         }
-        else if(Main.scene.screen == 2) {
+
+        //Instruction
+        else if(Main.scene.screen == 2){
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                Main.scene.screen = 0;
+                Main.scene.select.setyPos(300);
+            }
+        }
+
+        //Option
+        else if(Main.scene.screen == 3){
+            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                Main.scene.screen = 0;
+                Main.scene.select.setyPos(300);
+            }
+        }
+
+        //Game
+        else if(Main.scene.screen == 5) {
             //Joueur1
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                 Main.scene.joueurs.get(0).setDx(1);
@@ -64,6 +79,7 @@ public class Clavier implements KeyListener{
                     }
                 }
             }
+
             //Joueur2
             if (e.getKeyCode() == KeyEvent.VK_D) {
                 Main.scene.joueurs.get(1).setDx(1);
@@ -95,7 +111,8 @@ public class Clavier implements KeyListener{
             }
         }
 
-        else if(Main.scene.screen == 3) {
+        //Ecran Fin de partie
+        else if(Main.scene.screen == 6) {
             if(e.getKeyCode() == KeyEvent.VK_SPACE){
                 Main.scene.screen = 0;
             }

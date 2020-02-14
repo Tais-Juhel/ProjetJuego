@@ -27,8 +27,8 @@ public class Joueur{
     //CONSTRUCTEUR
 
     public Joueur(int x, int y, String strImage, int dirTir, int vie){
-        this.largeur = 40;
-        this.hauteur = 40;
+        this.largeur = 28;
+        this.hauteur = 43;
         this.x = x;
         this.y = y;
         this.dx = 0;
@@ -82,6 +82,14 @@ public class Joueur{
 
     public void setVie(int vie) {
         this.vie = vie;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     //METHODES
